@@ -1,6 +1,5 @@
 package me.quexer.herbst.herbstapi.listeners;
 
-import me.quexer.api.quexerapi.api.NickAPI;
 import me.quexer.api.quexerapi.event.EventManager;
 import me.quexer.api.quexerapi.event.PlayerNickEvent;
 import me.quexer.api.quexerapi.event.PlayerRemoveNickEvent;

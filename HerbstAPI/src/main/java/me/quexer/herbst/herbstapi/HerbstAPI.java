@@ -1,12 +1,10 @@
 package me.quexer.herbst.herbstapi;
 
-import jdk.nashorn.internal.objects.annotations.Getter;
 import me.quexer.herbst.herbstapi.commands.*;
 import me.quexer.herbst.herbstapi.listeners.PlayerListeners;
 import me.quexer.herbst.herbstapi.utils.TablistManager;
 import me.quexer.herbst.herbstplugin.HerbstPlugin;
 import org.bukkit.Bukkit;
-import org.bukkit.plugin.java.JavaPlugin;
 
 public final class HerbstAPI extends HerbstPlugin {
 

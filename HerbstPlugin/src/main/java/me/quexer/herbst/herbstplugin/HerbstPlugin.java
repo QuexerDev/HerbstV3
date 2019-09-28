@@ -23,8 +23,8 @@ public abstract class HerbstPlugin extends JavaPlugin {
     private String prefix;
     private RabbitMQ rabbitMQ;
     private RabbitMQConsumer rabbitMQConsumer;
-    private boolean tabOnThisServer = true;
-    private boolean nickOnThisServer = true;
+    private boolean tabOnThisServer;
+    private boolean nickOnThisServer;
     private BackendManager backendManager;
     private BackendPlayerManager backendPlayerManager;
     private FriendManager friendManager;
@@ -33,6 +33,8 @@ public abstract class HerbstPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
+        tabOnThisServer = true;
+        nickOnThisServer = true;
         quexerAPI = new QuexerAPI(this);
         prefix = "§eHerbst.net §8▎ §7";
         mongoManager = new MongoManager("localhost", 27017, "herbstt");
@@ -92,5 +94,13 @@ public abstract class HerbstPlugin extends JavaPlugin {
 
     public FriendManager getFriendManager() {
         return friendManager;
+    }
+
+    public void setTabOnThisServer(boolean tabOnThisServer) {
+        this.tabOnThisServer = tabOnThisServer;
+    }
+
+    public void setNickOnThisServer(boolean nickOnThisServer) {
+        this.nickOnThisServer = nickOnThisServer;
     }
 }

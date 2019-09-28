@@ -4,9 +4,13 @@ import me.quexer.api.quexerapi.api.NickAPI;
 import me.quexer.herbst.herbstplugin.HerbstPlugin;
 import me.quexer.herbst.herbstplugin.obj.BackendGroup;
 import me.quexer.herbst.herbstplugin.obj.BackendPlayer;
+import me.quexer.herbst.herbstplugin.obj.Data;
+import me.quexer.herbst.herbstplugin.obj.LobbyPlayer;
+import org.bson.Document;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.text.DecimalFormat;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicReference;
@@ -67,6 +71,9 @@ public class BackendManager {
         return null;
     }
 
+    public String numberFormat(Number number) {
+        return new DecimalFormat("###,###,###,###,###,###").format(number);
+    }
 
     public void savePlayer(BackendPlayer backendPlayer) {
         plugin.getBackendPlayerManager().saveToDB(backendPlayer);
@@ -106,6 +113,22 @@ public class BackendManager {
 
     public List<BackendGroup> getGroups() {
         return groups;
+    }
+
+    public Document lobbyPlayerToDocument(LobbyPlayer lobbyPlayer) {
+        return new Document("extraTypes", lobbyPlayer.getExtraTypes())
+                .append("dailyReward", lobbyPlayer.getDailyReward());
+    }
+
+    public Document dataToDocument(Data data) {
+
+        return new Document("coins", data.getCoins())
+                .append("keys", data.getKeys())
+                .append("cpr", data.getCpr())
+                .append("elo", data.getElo())
+                .append("nick", data.isNick())
+                .append("lobbyPlayer", lobbyPlayerToDocument(data.getLobbyPlayer()));
+
     }
 
 }

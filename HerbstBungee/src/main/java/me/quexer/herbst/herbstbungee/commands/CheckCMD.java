@@ -35,7 +35,7 @@ public class CheckCMD extends Command {
                         sender.sendMessage(plugin.getPrefix());
                         sender.sendMessage(plugin.getPrefix()+"§8▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀");
                         sender.sendMessage(plugin.getPrefix() + "§7Name§8: §e" + backendPlayer.getGroup().getColor() + name);
-                        sender.sendMessage(plugin.getPrefix() + "§7BanPoints§8: §e" + backendPlayer.getBanPlayer().getBanPoints() + backendPlayer.getMutePlayer().getBanPoints());
+                        sender.sendMessage(plugin.getPrefix() + "§7BanPoints§8: §e" + (backendPlayer.getBanPlayer().getBanPoints() + backendPlayer.getMutePlayer().getBanPoints()));
                         sender.sendMessage(plugin.getPrefix() + "§7Rang§8: " + backendPlayer.getGroup().getFullName());
                         sender.sendMessage(plugin.getPrefix());
                         sender.sendMessage(plugin.getPrefix() + "§7Gebannt§8: " + (backendPlayer.getBanPlayer().isPunished() ? "§aJa" : "§cNein"));

@@ -20,10 +20,12 @@ public class NickCMD implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player player = (Player) sender;
         if(plugin.getBackendManager().getPlayer(player.getUniqueId().toString()).getGroup().hasPermission(3)) {
-            if(NickAPI.hasNick(player) == false) {
-                plugin.getBackendManager().nick(player);
-            } else {
-                plugin.getBackendManager().unnick(player);
+            if(plugin.isNickOnThisServer()) {
+                if (NickAPI.hasNick(player) == false) {
+                    plugin.getBackendManager().nick(player);
+                } else {
+                    plugin.getBackendManager().unnick(player);
+                }
             }
         } else
             player.sendMessage(plugin.getPrefix() + "§cDazu hast du keine Rechte!");

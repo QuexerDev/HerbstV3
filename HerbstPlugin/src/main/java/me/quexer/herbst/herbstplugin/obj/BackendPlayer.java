@@ -120,54 +120,6 @@ public class BackendPlayer {
         }
     }
 
-    public static class Data {
-
-        private long coins;
-        private long keys;
-        private long cpr;
-        private long elo;
-        private boolean nick;
-
-        public long getCoins() {
-            return coins;
-        }
-
-        public void setCoins(long coins) {
-            this.coins = coins;
-        }
-
-        public long getKeys() {
-            return keys;
-        }
-
-        public void setKeys(long keys) {
-            this.keys = keys;
-        }
-
-        public long getCpr() {
-            return cpr;
-        }
-
-        public void setCpr(long cpr) {
-            this.cpr = cpr;
-        }
-
-        public long getElo() {
-            return elo;
-        }
-
-        public void setElo(long elo) {
-            this.elo = elo;
-        }
-
-        public boolean isNick() {
-            return nick;
-        }
-
-        public void setNick(boolean nick) {
-            this.nick = nick;
-        }
-    }
 
 
     public String getUuid() {
@@ -225,4 +177,6 @@ public class BackendPlayer {
     public void setFriendPlayer(FriendPlayer friendPlayer) {
         this.friendPlayer = friendPlayer;
     }
+
+
 }
