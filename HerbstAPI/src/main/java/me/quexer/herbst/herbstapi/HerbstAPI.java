@@ -15,7 +15,7 @@ public final class HerbstAPI extends HerbstPlugin {
     @Override
     public void init() {
         plugin = this;
-
+        
         Bukkit.getPluginCommand("nick").setExecutor(new NickCMD(this));
         Bukkit.getPluginCommand("tp").setExecutor(new TeleportCMD(this));
         Bukkit.getPluginCommand("gm").setExecutor(new GamemodeCMD(this));
@@ -25,11 +25,6 @@ public final class HerbstAPI extends HerbstPlugin {
 
         tablistManager = new TablistManager(this);
         new PlayerListeners(this);
-    }
-
-    @Override
-    public void disable() {
-
     }
 
     public HerbstPlugin getPlugin() {
