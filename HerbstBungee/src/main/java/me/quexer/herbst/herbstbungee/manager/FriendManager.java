@@ -61,7 +61,7 @@ public class FriendManager {
             return;
         }
 
-        if(targetUUID == senderUUID) {
+        if(targetUUID.equals(senderUUID)) {
             senderPlayer.sendMessage(plugin.getFriendPrefix()+"§cDu kannst nicht mit dir selber interagieren!");
             return;
         }
@@ -70,7 +70,7 @@ public class FriendManager {
             target.getFriendPlayer().getRequests().add(senderUUID);
             senderPlayer.sendMessage(plugin.getFriendPrefix() + "§7Du hast dem Spieler " + target.getGroup().getPrefix() + targetName + " §7eine Anfrage gesendet");
             if (plugin.getProxy().getPlayer(UUID.fromString(targetUUID)) != null) {
-                plugin.getProxy().getPlayer(UUID.fromString(targetUUID)).sendMessage(plugin.getFriendPrefix() + "§7Du hast eine Freundschaftsanfrage von " + target.getGroup().getPrefix() + targetName + " §7erhalten");
+                plugin.getProxy().getPlayer(UUID.fromString(targetUUID)).sendMessage(plugin.getFriendPrefix() + "§7Du hast eine Freundschaftsanfrage von " + sender.getGroup().getPrefix() + senderName + " §7erhalten");
                 new TextBuilder(plugin.getFriendPrefix())
                         .addExtra(new TextBuilder("§8[§aAnnehmen").setClick("friend accept " + senderName).setHover("§7Freundschaftsanfrage §aakzeptieren"))
                         .addExtra(new TextBuilder(" §8| "))
@@ -115,7 +115,7 @@ public class FriendManager {
         target.getFriendPlayer().getFriends().add(senderUUID);
 
         if (plugin.getProxy().getPlayer(UUID.fromString(targetUUID)) != null) {
-            plugin.getProxy().getPlayer(UUID.fromString(targetUUID)).sendMessage(plugin.getFriendPrefix() + target.getGroup().getPrefix() + targetName + " §7hat deine Freundschaftsanfrage §aakzeptiert");
+            plugin.getProxy().getPlayer(UUID.fromString(targetUUID)).sendMessage(plugin.getFriendPrefix() + sender.getGroup().getPrefix() + senderName + " §7hat deine Freundschaftsanfrage §aakzeptiert");
         }
         senderPlayer.sendMessage(plugin.getFriendPrefix() + "§7Du bist nun mit " + target.getGroup().getPrefix() + targetName + " §7befreundet");
 
@@ -152,7 +152,7 @@ public class FriendManager {
         }
 
         if (plugin.getProxy().getPlayer(UUID.fromString(targetUUID)) != null) {
-            plugin.getProxy().getPlayer(UUID.fromString(targetUUID)).sendMessage(plugin.getFriendPrefix() + target.getGroup().getPrefix() + targetName + " §7hat deine Freundschaftsanfrage §cabgelehnt");
+            plugin.getProxy().getPlayer(UUID.fromString(targetUUID)).sendMessage(plugin.getFriendPrefix() + sender.getGroup().getPrefix() + senderName + " §7hat deine Freundschaftsanfrage §cabgelehnt");
         }
         senderPlayer.sendMessage(plugin.getFriendPrefix() + "§7Du hast die Anfrage von " + target.getGroup().getPrefix() + targetName + " §7abgelehnt");
         new TextBuilder(plugin.getFriendPrefix())
@@ -191,8 +191,8 @@ public class FriendManager {
         sender.getFriendPlayer().getBlocked().add(senderUUID);
         senderPlayer.sendMessage(plugin.getFriendPrefix() + "§7Du hast den Spieler " + target.getGroup().getPrefix() + targetName + " §7blockiert");
 
-        if (plugin.getProxy().getPlayer(UUID.fromString(senderUUID)) != null) {
-            plugin.getProxy().getPlayer(UUID.fromString(senderUUID)).sendMessage(plugin.getFriendPrefix() + sender.getGroup().getPrefix() + senderName + " §7hat dich blockiert");
+        if (plugin.getProxy().getPlayer(UUID.fromString(targetUUID)) != null) {
+            plugin.getProxy().getPlayer(UUID.fromString(targetUUID)).sendMessage(plugin.getFriendPrefix() + sender.getGroup().getPrefix() + senderName + " §7hat dich blockiert");
         }
 
     }
@@ -221,8 +221,8 @@ public class FriendManager {
         sender.getFriendPlayer().getBlocked().remove(senderUUID);
         senderPlayer.sendMessage(plugin.getFriendPrefix() + "§7Du hast den Spieler " + target.getGroup().getPrefix() + targetName + " §7freigegeben");
 
-        if (plugin.getProxy().getPlayer(UUID.fromString(senderUUID)) != null) {
-            plugin.getProxy().getPlayer(UUID.fromString(senderUUID)).sendMessage(plugin.getFriendPrefix() + sender.getGroup().getPrefix() + senderName + " §7hat dich freigegeben");
+        if (plugin.getProxy().getPlayer(UUID.fromString(targetUUID)) != null) {
+            plugin.getProxy().getPlayer(UUID.fromString(targetUUID)).sendMessage(plugin.getFriendPrefix() + sender.getGroup().getPrefix() + senderName + " §7hat dich freigegeben");
         }
 
     }
@@ -273,7 +273,7 @@ public class FriendManager {
         senderPlayer.sendMessage(plugin.getFriendPrefix() + "§7Du bist jetzt nicht mehr mit " + target.getGroup().getPrefix() + targetName + " §7befreundet");
 
         if (plugin.getProxy().getPlayer(UUID.fromString(senderUUID)) != null) {
-            plugin.getProxy().getPlayer(UUID.fromString(senderUUID)).sendMessage(plugin.getFriendPrefix() + sender.getGroup().getPrefix() + senderName + " §7hat die Freundschaft mit dir beendet");
+            plugin.getProxy().getPlayer(UUID.fromString(senderUUID)).sendMessage(plugin.getFriendPrefix() + target.getGroup().getPrefix() + targetName + " §7hat die Freundschaft mit dir beendet");
         }
 
     }
@@ -336,19 +336,19 @@ public class FriendManager {
             senderPlayer.sendMessage(plugin.getFriendPrefix()+"§cDieser Spieler ist offline!");
             return;
         }
-        if(targetUUID == senderUUID) {
+        if(targetUUID.equals(senderUUID)) {
             senderPlayer.sendMessage(plugin.getFriendPrefix()+"§cDu kannst nicht mit dir selber interagieren!");
             return;
         }
 
-        senderPlayer.sendMessage(plugin.getFriendPrefix()+"§e"+senderName+" -> Dir§8: §7"+msg);
+        plugin.getProxy().getPlayer(UUID.fromString(targetUUID)).sendMessage(plugin.getFriendPrefix()+"§e"+senderName+" -> Dir§8: §7"+msg);
         senderPlayer.sendMessage(plugin.getFriendPrefix()+"§eDu -> "+targetName+"§8: §7"+msg);
 
     }
 
-    public HashMap<String, Document> getFriendForRabbit(String uuid) {
+    public Document getDataForSpigot(String uuid) {
         FriendPlayer friendPlayer = plugin.getBackendManager().getPlayer(uuid).getFriendPlayer();
-        HashMap<String, Document> data = new HashMap<>();
+
         return null;
 
 

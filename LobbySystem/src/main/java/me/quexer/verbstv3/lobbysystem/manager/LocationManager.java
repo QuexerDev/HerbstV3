@@ -39,7 +39,7 @@ public class LocationManager {
     public Location getLocation(String name) {
         if(plugin.getQuexerAPI().getLocationAPI().exist(name))
             return plugin.getQuexerAPI().getLocationAPI().getLocation(name);
-        else return new Location(Bukkit.getWorld("spawn"), -111, 5, 505);
+        else return new Location(Bukkit.getWorld("world"), -111, 5, 505);
     }
 
     public Location getSpawn() {
