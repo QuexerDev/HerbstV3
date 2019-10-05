@@ -27,6 +27,11 @@ public final class HerbstAPI extends HerbstPlugin {
         new PlayerListeners(this);
     }
 
+    @Override
+    public void disable() {
+        
+    }
+
     public HerbstPlugin getPlugin() {
         return plugin;
     }
