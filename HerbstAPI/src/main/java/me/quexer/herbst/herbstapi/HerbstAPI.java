@@ -29,7 +29,7 @@ public final class HerbstAPI extends HerbstPlugin {
 
     @Override
     public void disable() {
-        
+
     }
 
     public HerbstPlugin getPlugin() {
