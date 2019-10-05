@@ -20,7 +20,7 @@ public class NickCMD implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         Player player = (Player) sender;
         if(plugin.getBackendManager().getPlayer(player.getUniqueId().toString()).getGroup().hasPermission(3)) {
-            if(plugin.isNickOnThisServer()) {
+            if(plugin.isSetNick()) {
                 if (NickAPI.hasNick(player) == false) {
                     plugin.getBackendManager().nick(player);
                 } else {

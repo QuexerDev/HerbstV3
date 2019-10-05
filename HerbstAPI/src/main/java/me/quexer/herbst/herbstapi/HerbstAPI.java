@@ -4,6 +4,7 @@ import me.quexer.herbst.herbstapi.commands.*;
 import me.quexer.herbst.herbstapi.listeners.PlayerListeners;
 import me.quexer.herbst.herbstapi.utils.TablistManager;
 import me.quexer.herbst.herbstplugin.HerbstPlugin;
+import me.quexer.herbst.herbstplugin.game.GameAPI;
 import org.bukkit.Bukkit;
 
 public final class HerbstAPI extends HerbstPlugin {
@@ -25,6 +26,11 @@ public final class HerbstAPI extends HerbstPlugin {
 
         tablistManager = new TablistManager(this);
         new PlayerListeners(this);
+    }
+
+    @Override
+    public GameAPI initGameAPI() {
+        return new GameAPI(plugin, null, 1, null, null, null);
     }
 
     @Override

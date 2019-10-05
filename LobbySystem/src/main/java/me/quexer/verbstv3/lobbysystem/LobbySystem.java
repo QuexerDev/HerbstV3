@@ -3,9 +3,12 @@ package me.quexer.verbstv3.lobbysystem;
 import de.robingrether.idisguise.api.DisguiseAPI;
 import me.quexer.api.quexerapi.api.NickAPI;
 import me.quexer.herbst.herbstplugin.HerbstPlugin;
+import me.quexer.herbst.herbstplugin.game.GameAPI;
+import me.quexer.herbst.herbstplugin.game.GameState;
 import me.quexer.verbstv3.lobbysystem.commands.SetSpawnCMD;
 import me.quexer.verbstv3.lobbysystem.listeners.MainListeners;
 import me.quexer.verbstv3.lobbysystem.manager.*;
+import me.quexer.verbstv3.lobbysystem.obj.state.LobbyState;
 import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
 import org.bukkit.Material;
@@ -40,13 +43,13 @@ public final class LobbySystem extends HerbstPlugin implements Listener {
 
     private DisguiseAPI disguiseAPI;
 
+    private GameState lobbyState;
 
     @Override
     public void init() {
         instance = this;
         lobbyPrefix = "§eLobby §8▎ §7";
 
-        setNickOnThisServer(false);
 
         Bukkit.getWorlds().forEach(world -> {
             world.setAmbientSpawnLimit(1);
@@ -81,7 +84,16 @@ public final class LobbySystem extends HerbstPlugin implements Listener {
         locationManager.getCaseOpeningCase().getBlock().setMetadata("caseopening", new FixedMetadataValue(this, "hallo"));
         Bukkit.getPluginManager().registerEvents(this, this);
 
+        lobbyState = new LobbyState();
 
+        setSetNick(false);
+        setSetTablist(true);
+
+    }
+
+    @Override
+    public GameAPI initGameAPI() {
+        return new GameAPI(this, "Old-Gomme", 20, lobbyState, lobbyState, lobbyState);
     }
 
     @Override

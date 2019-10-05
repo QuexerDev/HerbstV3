@@ -38,9 +38,9 @@ public class PlayerListeners {
             });
             BackendPlayer backendPlayer = plugin.getBackendManager().getPlayer(event.getPlayer().getUniqueId().toString());
             System.out.println(backendPlayer);
-            if (plugin.isTabOnThisServer())
+            if (plugin.isSetTablist())
                 plugin.getTablistManager().setTablist(event.getPlayer(), backendPlayer);
-            if (plugin.isNickOnThisServer() && backendPlayer.getGroup().getLevelID() >= 2) {
+            if (plugin.isSetNick() && backendPlayer.getGroup().getLevelID() >= 2) {
                 if (backendPlayer.getData().isNick()) {
                     plugin.getBackendManager().nick(event.getPlayer());
                 }
@@ -81,7 +81,7 @@ public class PlayerListeners {
                 event.getPlayer().sendMessage("");
                 event.getPlayer().sendMessage("§5NICK §8▎ §7Dein §eNickname §7wurde entfernt§8!");
                 event.getPlayer().sendMessage("");
-                if (plugin.isTabOnThisServer())
+                if (plugin.isSetTablist())
                     plugin.getTablistManager().setTablist(event.getPlayer(), plugin.getBackendManager().getPlayer(event.getPlayer().getUniqueId().toString()));
             });
         };
@@ -91,7 +91,7 @@ public class PlayerListeners {
                 event.getPlayer().sendMessage("§5NICK §8▎ §7Dein neuer §eNickname §7lautet§8: §6" + event.getNick());
                 // event.getPlayer().sendMessage("§7➜ §5§lNick §f▎  §7Dein neuer §e§lNickname §7lautet§8: §6"+event.getNick());
                 event.getPlayer().sendMessage("");
-                if (plugin.isTabOnThisServer())
+                if (plugin.isSetTablist())
                     plugin.getTablistManager().setTablist(event.getPlayer(), plugin.getBackendManager().getPlayer(event.getPlayer().getUniqueId().toString()));
             });
         };
