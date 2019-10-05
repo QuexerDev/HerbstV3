@@ -2,16 +2,18 @@ package me.quexer.herbst.herbstapi;
 
 import me.quexer.herbst.herbstapi.commands.*;
 import me.quexer.herbst.herbstapi.listeners.PlayerListeners;
+import me.quexer.herbst.herbstapi.placeholder.PlaceholderState;
 import me.quexer.herbst.herbstapi.utils.TablistManager;
 import me.quexer.herbst.herbstplugin.HerbstPlugin;
 import me.quexer.herbst.herbstplugin.game.GameAPI;
+import me.quexer.herbst.herbstplugin.game.GameState;
 import org.bukkit.Bukkit;
 
 public final class HerbstAPI extends HerbstPlugin {
 
     private HerbstPlugin plugin;
     private TablistManager tablistManager;
-
+    private GameState placeholderState;
 
     @Override
     public void init() {
@@ -30,7 +32,8 @@ public final class HerbstAPI extends HerbstPlugin {
 
     @Override
     public GameAPI initGameAPI() {
-        return new GameAPI(plugin, null, 1, null, null, null);
+        placeholderState = new PlaceholderState();
+        return new GameAPI(plugin, "Not Loaded!", 5, placeholderState, null, null);
     }
 
     @Override

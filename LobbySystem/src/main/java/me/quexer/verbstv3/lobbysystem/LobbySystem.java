@@ -84,7 +84,7 @@ public final class LobbySystem extends HerbstPlugin implements Listener {
         locationManager.getCaseOpeningCase().getBlock().setMetadata("caseopening", new FixedMetadataValue(this, "hallo"));
         Bukkit.getPluginManager().registerEvents(this, this);
 
-        lobbyState = new LobbyState();
+
 
         setSetNick(false);
         setSetTablist(true);
@@ -93,6 +93,7 @@ public final class LobbySystem extends HerbstPlugin implements Listener {
 
     @Override
     public GameAPI initGameAPI() {
+        lobbyState = new LobbyState();
         return new GameAPI(this, "Old-Gomme", 20, lobbyState, lobbyState, lobbyState);
     }
 
