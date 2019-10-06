@@ -1,5 +1,7 @@
 package me.quexer.herbst.herbstplugin;
 
+import de.dytanic.cloudnet.api.CloudAPI;
+import de.dytanic.cloudnet.bridge.CloudServer;
 import me.quexer.api.quexerapi.QuexerAPI;
 import me.quexer.api.quexerapi.api.NickAPI;
 import me.quexer.api.quexerapi.database.MongoManager;
@@ -30,16 +32,11 @@ public abstract class HerbstPlugin extends JavaPlugin {
     private FriendManager friendManager;
     private GameAPI gameAPI;
 
-    private boolean setTablist;
-    private boolean setNick;
-
 
     @Override
     public void onEnable() {
         instance = this;
         quexerAPI = new QuexerAPI(this);
-        setTablist = false;
-        setNick = false;
         prefix = "§eHerbst.net §8▎ §7";
         mongoManager = new MongoManager("localhost", 27017, "herbstt");
         rabbitMQ = new RabbitMQ("herbst-spigot");
@@ -102,18 +99,12 @@ public abstract class HerbstPlugin extends JavaPlugin {
     }
 
     public boolean isSetTablist() {
-        return setTablist;
+        return true;
     }
 
     public boolean isSetNick() {
-        return setNick;
+        return !CloudAPI.getInstance().getServiceId().getServerId().contains("Lobby");
     }
 
-    public void setSetTablist(boolean setTablist) {
-        this.setTablist = setTablist;
-    }
 
-    public void setSetNick(boolean setNick) {
-        this.setNick = setNick;
-    }
 }

@@ -86,8 +86,7 @@ public final class LobbySystem extends HerbstPlugin implements Listener {
 
 
 
-        setSetNick(false);
-        setSetTablist(true);
+
 
     }
 

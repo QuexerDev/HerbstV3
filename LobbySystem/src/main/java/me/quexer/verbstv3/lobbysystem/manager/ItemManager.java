@@ -72,6 +72,7 @@ public class ItemManager {
                         plugin.getBackendManager().getPlayer(event.getPlayer().getUniqueId().toString()).getData().setNick(true);
                         event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.LEVEL_UP, 3, 3);
                         used.add(event.getPlayer());
+                        plugin.getBackendManager().savePlayer(plugin.getBackendManager().getPlayer(event.getPlayer().getUniqueId().toString()));
                         Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, () -> used.remove(event.getPlayer()), 5 * 20);
                     } else {
                         event.getPlayer().sendMessage(LobbySystem.getLobbyPrefix() + "§cBitte warte einen Moment, bis du dieses Item benutzt!");
@@ -82,6 +83,7 @@ public class ItemManager {
                         plugin.getBackendManager().getPlayer(event.getPlayer().getUniqueId().toString()).getData().setNick(false);
                         event.getPlayer().playSound(event.getPlayer().getLocation(), Sound.LEVEL_UP, 0.3F, 0.3F);
                         used.add(event.getPlayer());
+                        plugin.getBackendManager().savePlayer(plugin.getBackendManager().getPlayer(event.getPlayer().getUniqueId().toString()));
                         Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, () -> used.remove(event.getPlayer()), 5 * 20);
                     } else {
                         event.getPlayer().sendMessage(LobbySystem.getLobbyPrefix() + "§cBitte warte einen Moment, bis du dieses Item benutzt!");

@@ -8,10 +8,7 @@ import me.quexer.herbst.herbstapi.HerbstAPI;
 import me.quexer.herbst.herbstplugin.HerbstPlugin;
 import me.quexer.herbst.herbstplugin.obj.BackendPlayer;
 import org.bukkit.Bukkit;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerCommandPreprocessEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.*;
 import org.bukkit.help.HelpTopic;
 
 public class PlayerListeners {
@@ -23,7 +20,7 @@ public class PlayerListeners {
     private EventManager.EventListener<AsyncPlayerChatEvent> chatEvent;
     private EventManager.EventListener<PlayerNickEvent> nickEvent;
     private EventManager.EventListener<PlayerRemoveNickEvent> removeNickEvent;
-    private EventManager.EventListener<PlayerCommandPreprocessEvent> commandEvent;
+    private EventManager.EventListener<AsyncPlayerPreLoginEvent> playerPreLogin;
 
     public PlayerListeners(HerbstAPI plugin) {
         this.plugin = plugin;
@@ -31,6 +28,13 @@ public class PlayerListeners {
     }
 
     private void initListeners() {
+
+        playerPreLogin = event -> {
+              Bukkit.getScheduler().runTaskLater(plugin, () -> {
+                  System.out.println("WAIT");
+              }, 30);
+        };
+
         joinEvent = event -> {
             event.setJoinMessage(null);
             Bukkit.getOnlinePlayers().forEach(o -> {
@@ -47,6 +51,7 @@ public class PlayerListeners {
             }
             Bukkit.getOnlinePlayers().forEach(o -> {
                 o.showPlayer(event.getPlayer());
+                o.sendMessage(String.valueOf(plugin.isSetTablist()));
             });
 
         };
@@ -54,10 +59,11 @@ public class PlayerListeners {
         quitEvent = event -> {
             event.setQuitMessage(null);
             BackendPlayer backendPlayer = plugin.getBackendManager().getPlayer(event.getPlayer().getUniqueId().toString());
-            plugin.getBackendPlayerManager().saveToDB(backendPlayer);
+            plugin.getBackendManager().savePlayer(backendPlayer);
             plugin.getQuexerAPI().removeMetadata(event.getPlayer(), "backendplayer");
 
         };
+
 
         chatEvent = event -> {
             event.setFormat(event.getPlayer().getDisplayName() + " §8➜ §7" + event.getMessage());
@@ -102,6 +108,7 @@ public class PlayerListeners {
         plugin.getQuexerAPI().getEventManager().registerEvent(AsyncPlayerChatEvent.class, chatEvent);
         plugin.getQuexerAPI().getEventManager().registerEvent(PlayerNickEvent.class, nickEvent);
         plugin.getQuexerAPI().getEventManager().registerEvent(PlayerRemoveNickEvent.class, removeNickEvent);
+        plugin.getQuexerAPI().getEventManager().registerEvent(AsyncPlayerPreLoginEvent.class, playerPreLogin);
     }
 
 
